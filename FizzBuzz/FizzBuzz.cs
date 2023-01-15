@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FizzBuzz.Rules;
+using System;
+using System.Collections.Generic;
 
 /**
  *
@@ -29,7 +31,7 @@ namespace FizzBuzz
                 {
                     output += "Fizz";
                 }
-                
+
                 if (i % 5 == 0)
                 {
                     output += "Buzz";
@@ -39,18 +41,28 @@ namespace FizzBuzz
                 {
                     output = i.ToString();
                 }
-                
+
                 Console.WriteLine("{0}: {1}", i, output);
             }
         }
     }
-    
+
     public class Program
     {
         public static void Main(string[] args)
         {
             FizzBuzzEngine engine = new FizzBuzzEngine();
-            engine.Run();
+            //engine.Run();
+
+            var rules = new List<IEngineRule>
+            {
+              new FizzRule(),
+              new BuzzRule(),
+              //new BarRule()
+            };
+
+            var rulesEngine = new Engine(rules);
+            rulesEngine.Run(100);
         }
     }
 }
